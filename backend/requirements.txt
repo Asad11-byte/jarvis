@@ -1,0 +1,22 @@
+fastapi==0.129.0
+uvicorn[standard]==0.32.1
+pydantic==2.13.4
+pydantic-settings==2.14.2
+python-dotenv==1.0.1
+
+# Google OAuth + APIs
+google-auth==2.36.0
+google-auth-oauthlib==1.2.1
+google-api-python-client==2.154.0
+
+# Supabase
+supabase==2.10.0
+
+# Security / sessions
+cryptography==46.0.3
+itsdangerous==2.2.0
+
+# LangGraph (used from Phase 3 onward, included now so requirements don't churn)
+langgraph==0.2.60
+langchain-core==0.3.28
+langchain-groq=1.1.3
