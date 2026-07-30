@@ -4,7 +4,7 @@ from starlette.middleware.sessions import SessionMiddleware
 
 from app.config import settings
 from app.routers import auth
-from app.routers import auth, emails, events, todos
+from app.routers import auth, emails, events, todos, chat
 
 app = FastAPI(title="Jarvis API", version="0.1.0")
 
@@ -26,6 +26,7 @@ app.include_router(auth.router)
 app.include_router(emails.router)
 app.include_router(events.router)
 app.include_router(todos.router)
+app.include_router(chat.router)
 
 @app.get("/")
 def root():

@@ -21,3 +21,27 @@ export async function fetchCurrentUser() {
 export async function logout() {
   await api.post('/auth/logout')
 }
+
+export async function sendChatMessage(message, conversationId) {
+  const res = await api.post('/chat', { message, conversation_id: conversationId })
+  return res.data
+}
+
+export async function fetchEvents() {
+  const res = await api.get('/events')
+  return res.data
+}
+
+export async function fetchTodos() {
+  const res = await api.get('/todos')
+  return res.data
+}
+
+export async function updateTodo(id, updates) {
+  const res = await api.patch(`/todos/${id}`, updates)
+  return res.data
+}
+
+export async function deleteTodo(id) {
+  await api.delete(`/todos/${id}`)
+}
