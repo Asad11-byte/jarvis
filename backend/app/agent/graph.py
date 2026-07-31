@@ -41,4 +41,4 @@ def build_agent(credentials):
         *build_task_tools(tasks_service),
     ]
 
-    return create_react_agent(_llm, tools=tools, prompt=SYSTEM_PROMPT)
+    return create_react_agent(_llm, tools=tools, state_modifier=SYSTEM_PROMPT)
