@@ -18,5 +18,5 @@ itsdangerous==2.2.0
 
 # LangGraph (used from Phase 3 onward, included now so requirements don't churn)
 langgraph==0.2.60
-langchain-core==0.3.28
-langchain-groq==1.1.3
+langchain-core==0.3.74
+langchain-groq==0.3.6
