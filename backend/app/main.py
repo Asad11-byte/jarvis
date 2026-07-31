@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 
 from app.config import settings
-from app.routers import auth
 from app.routers import auth, emails, events, todos, chat
 
 app = FastAPI(title="Jarvis API", version="0.1.0")
@@ -20,22 +19,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth.router)
+# Prefixed with /api so backend routes can never collide with frontend
+# routes on the same domain in the monorepo deployment (e.g. the frontend
+# has a page at /chat, and the backend has an endpoint at /chat -- the
+# prefix is what keeps those distinct once both are served from one origin).
+app.include_router(auth.router, prefix="/api")
+app.include_router(emails.router, prefix="/api")
+app.include_router(events.router, prefix="/api")
+app.include_router(todos.router, prefix="/api")
+app.include_router(chat.router, prefix="/api")
 
-app.include_router(auth.router)
-app.include_router(emails.router)
-app.include_router(events.router)
-app.include_router(todos.router)
-app.include_router(chat.router)
 
-@app.get("/")
+@app.get("/api")
 def root():
     return {"status": "ok", "service": "jarvis-api"}
 
 
-@app.get("/health")
+@app.get("/api/health")
 def health():
     return {"status": "healthy"}
-
-# NOTE: /chat, /emails, /events, /todos routers are added in Phase 2+
-# once OAuth + Supabase persistence are verified end-to-end.

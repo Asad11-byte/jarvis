@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+// Base already includes /api -- every call below is relative to that,
+// so /api never needs to be repeated (or forgotten) path by path.
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 
 export const api = axios.create({
   baseURL: API_URL,
