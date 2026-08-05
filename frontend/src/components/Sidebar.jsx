@@ -24,6 +24,7 @@ export default function Sidebar({ user, setUser }) {
       <nav style={styles.nav}>
         <NavLink to="/dashboard" style={linkStyle}>Dashboard</NavLink>
         <NavLink to="/chat" style={linkStyle}>Chat</NavLink>
+        <NavLink to="/voice" style={linkStyle}>Voice Assistant</NavLink>
       </nav>
 
       <div style={styles.scrollArea}>
@@ -43,13 +44,20 @@ export default function Sidebar({ user, setUser }) {
           {user.avatar_url ? (
             <img src={user.avatar_url} alt="" style={styles.avatar} />
           ) : (
-            <div style={styles.avatarFallback}>{(user.full_name || user.email || '?')[0].toUpperCase()}</div>
+            <div style={styles.avatarFallback}>
+              {(user.full_name || user.email || '?')[0].toUpperCase()}
+            </div>
           )}
           <div style={styles.userText}>
-            <div style={styles.userName}>{user.full_name || user.email}</div>
+            <div style={styles.userName}>
+              {user.full_name || user.email}
+            </div>
           </div>
         </div>
-        <button onClick={handleLogout} style={styles.logoutBtn}>Sign out</button>
+
+        <button onClick={handleLogout} style={styles.logoutBtn}>
+          Sign out
+        </button>
       </div>
     </aside>
   )
@@ -137,7 +145,9 @@ const styles = {
     fontWeight: 600,
     flexShrink: 0,
   },
-  userText: { minWidth: 0 },
+  userText: {
+    minWidth: 0,
+  },
   userName: {
     fontSize: 13,
     color: 'var(--text)',

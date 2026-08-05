@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
+
 import Login from './pages/Login.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Chat from './pages/Chat.jsx'
+import Voice from './pages/Voice.jsx'
+
 import Sidebar from './components/Sidebar.jsx'
 import { fetchCurrentUser } from './api/client.js'
 
@@ -30,7 +33,15 @@ export default function App() {
 
   if (loading) {
     return (
-      <div style={{ display: 'grid', placeItems: 'center', height: '100vh', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+      <div
+        style={{
+          display: 'grid',
+          placeItems: 'center',
+          height: '100vh',
+          color: 'var(--text-muted)',
+          fontFamily: 'var(--font-mono)',
+        }}
+      >
         booting jarvis...
       </div>
     )
@@ -38,10 +49,23 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path="/" element={user ? <Navigate to="/dashboard" replace /> : <Login />} />
-      <Route element={user ? <ProtectedLayout user={user} setUser={setUser} /> : <Navigate to="/" replace />}>
+      <Route
+        path="/"
+        element={user ? <Navigate to="/dashboard" replace /> : <Login />}
+      />
+
+      <Route
+        element={
+          user ? (
+            <ProtectedLayout user={user} setUser={setUser} />
+          ) : (
+            <Navigate to="/" replace />
+          )
+        }
+      >
         <Route path="/dashboard" element={<Dashboard user={user} />} />
         <Route path="/chat" element={<Chat />} />
+        <Route path="/voice" element={<Voice />} />
       </Route>
     </Routes>
   )
